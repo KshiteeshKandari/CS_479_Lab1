@@ -24,8 +24,21 @@ void graph_setup() {
   count = 0;
 }
 
+//void home_button(){
+//  b4 = loadImage("b4.png");
+//  image(b4,width-50,0,50,50);
+  
+//  if (mouseX > width-50 && mouseX < width && mouseY > 0 && mouseY <50) {
+//     if (mousePressed) {
+//        i4Clicked = true;  // Set the imageClicked variable to true
+//      }
+//  }
+//  if (i4Clicked){tab = "intro";}
+//  i4Clicked= false;
+//}
+
 void graph_draw() {
-  background(255,165,0);
+  background(185,160,217);
   textSize(9);
   
   lineChart.draw(15, 15, width - 30, height - 30);
@@ -35,6 +48,10 @@ void graph_draw() {
   fill(120);
   textSize(20);
   text("User's Heart Beat", 70, 30);
+  
+  home_button();
+  
+
 }
 
 void graph_serialEvent(float val) {

@@ -7,14 +7,21 @@ void high_low_setup() {
 }
 
 void high_low_draw() {
+  
+ 
+ 
   pushStyle();
-  background(200);
+  background(169, 209, 245);
   String output = "LOW HR: " + low_HR + "  HIGH HR: " + high_HR;
   textSize(30);
   fill(204, 102, 0);
   textAlign(CENTER, CENTER);
   text(output, width/2, 90);
   popStyle();
+  
+  home_button();
+  
+
 }
 
 void high_low_serialEvent(float val) {

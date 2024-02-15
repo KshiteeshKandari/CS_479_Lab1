@@ -1,15 +1,15 @@
-void keyPressed() {
-  switch (key) {
-    case 'd':
-      tab = "intro";
-      break;
+//void keyPressed() {
+//  switch (key) {
+//    case 'd':
+//      tab = "intro";
+//      break;
       
-    case 's':
-      tab = "graph";
-      break;
+//    case 's':
+//      tab = "graph";
+//      break;
       
-    case 'a':
-      tab = "high_low";
-      break;
-  }
-}
+//    case 'a':
+//      tab = "high_low";
+//      break;
+//  }
+//}
