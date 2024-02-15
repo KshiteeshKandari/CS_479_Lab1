@@ -5,6 +5,7 @@ Serial myPort;
 
 String tab = "intro";
 
+
 void setup() {
   String portName = Serial.list()[0];
   myPort = new Serial(this, portName, 115200);
@@ -25,6 +26,9 @@ void draw() {
     
   else if (tab == "graph")
     graph_draw();
+  
+  else if (tab == "rest")
+    rest_draw();
 }
 
 void serialEvent(Serial myPort) {

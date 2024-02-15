@@ -1,6 +1,6 @@
 void keyPressed() {
   switch (key) {
-    case 'a':
+    case 'd':
       tab = "intro";
       break;
       
@@ -8,7 +8,7 @@ void keyPressed() {
       tab = "graph";
       break;
       
-    case 'd':
+    case 'a':
       tab = "high_low";
       break;
   }
