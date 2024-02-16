@@ -1,6 +1,6 @@
 import processing.serial.*;
 import org.gicentre.utils.stat.*;
-import processing.sound.*;
+//import processing.sound.*;
 
 
 
@@ -43,6 +43,7 @@ void serialEvent(Serial myPort) {
     float val = float(tempVal);
     high_low_serialEvent(val);
     graph_serialEvent(val);
+    stressed_out_serialEvent(val);
     println(val);
   }
 }
