@@ -31,11 +31,11 @@ void high_low_setup() {
 }
 
 //
-void keyPressed() {
-  // Generate new random heart rates when a key is pressed
-  generateRandomHeartRates();
-  calculateZones();
-}
+//void keyPressed() {
+//  // Generate new random heart rates when a key is pressed
+//  generateRandomHeartRates();
+//  calculateZones();
+//}
 //
 
 void high_low_draw() {

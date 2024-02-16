@@ -3,10 +3,13 @@
 ///
 import controlP5.*;
 
+
+
+
 ControlP5 cp5;
 ///
 
-
+PFont h_font;
 
 
 void home_button(){
@@ -52,7 +55,11 @@ void intro_draw() {
   b1 = loadImage("b1.png");
   b2 = loadImage("b2.png");
   b3 = loadImage("b3.png");
+  s = loadImage("s.png");
+  r = loadImage("r.png");
   //b4 = loadImage("b4.png");
+  
+  
   
   
   background(img);
@@ -62,6 +69,8 @@ void intro_draw() {
   textSize(22);
   textAlign(CENTER, CENTER);
   
+  h_font = createFont("h_font.ttf",22);
+  textFont(h_font);
   
   image(b1,width/8,height/3,100,100);
   text("HeartBeat Graph", 170, 150);
