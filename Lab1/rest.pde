@@ -37,7 +37,7 @@ void rest_draw() {
   image(s, width / 2 - scaledWidth / 2, height / 2 - scaledHeight / 2, scaledWidth, scaledHeight);
   fill(255, 105, 105);
   textFont(font);
-  text("Caution!! You are Stressed", width/2, 480);
+  text("Caution!! You are Stressed", (width/2)-200, 480);
   textFont(h_font);
   
   stressed = true;
@@ -50,7 +50,7 @@ void rest_draw() {
   image(r, width / 2 - scaledWidth / 2, height / 2 - scaledHeight / 2, scaledWidth, scaledHeight);
   fill(255, 245, 224);
   textFont(font);
-  text("Relaxed!", width/2, 480);
+  text("Relaxed!", (width/2)-70, 480);
   textFont(h_font);
   }
   //==============================

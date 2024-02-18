@@ -42,6 +42,7 @@ void intro_draw() {
   PImage b1;
   PImage b2;
   PImage b3;
+
   //PImage b4;
 
   pushStyle();
@@ -57,6 +58,7 @@ void intro_draw() {
   b3 = loadImage("b3.png");
   s = loadImage("s.png");
   r = loadImage("r.png");
+  
   //b4 = loadImage("b4.png");
   
   

@@ -17,25 +17,12 @@ void graph_setup() {
   lineChart.setYFormat("00");
   lineChart.setXFormat("0");
   
-  lineChart.setPointColour(color(180, 50, 100, 100));
+  //lineChart.setPointColour(color(180, 50, 100, 100));
   lineChart.setPointSize(5);
   lineChart.setLineWidth(2);
   
   count = 0;
 }
-
-//void home_button(){
-//  b4 = loadImage("b4.png");
-//  image(b4,width-50,0,50,50);
-  
-//  if (mouseX > width-50 && mouseX < width && mouseY > 0 && mouseY <50) {
-//     if (mousePressed) {
-//        i4Clicked = true;  // Set the imageClicked variable to true
-//      }
-//  }
-//  if (i4Clicked){tab = "intro";}
-//  i4Clicked= false;
-//}
 
 void graph_draw() {
   background(185,160,217);
@@ -65,5 +52,22 @@ void graph_serialEvent(float val) {
     lineChartY.remove(0);
   }
   
+  //lineChart.setData(lineChartX.array(), lineChartY.array());
+  
+  int pointColor = Color_lines(val);
+  lineChart.setPointColour(pointColor);
+
   lineChart.setData(lineChartX.array(), lineChartY.array());
+}
+
+int Color_lines(float heartbeatValue) {
+  if (heartbeatValue > 110) {
+    return color(154, 3, 30); // peak_performance
+  } else if (heartbeatValue >= 90 && heartbeatValue <= 110) {
+    return color(227, 100, 20); // fat_burn
+  } else if (heartbeatValue >= 80 && heartbeatValue < 90) {
+    return color(101, 183, 65); // cardioworkout
+  } else {
+    return color(187, 226, 236); // light jog
+  }
 }

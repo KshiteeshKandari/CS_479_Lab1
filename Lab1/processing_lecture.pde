@@ -17,8 +17,9 @@ void setup() {
   
   size(986, 540);
   
-  high_low_setup();
+  
   graph_setup();
+  high_low_setup();
 }
 
 void draw() {
@@ -46,4 +47,6 @@ void serialEvent(Serial myPort) {
     stressed_out_serialEvent(val);
     println(val);
   }
+  //float newHeartbeatValue = random(60, 120);
+  //graph_serialEvent(newHeartbeatValue);
 }

@@ -5,6 +5,12 @@ int restingHeartRate;
 int[] heartRateData;
 int timeInterval; // Time interval in seconds for data collection
 int[] zoneCounts = new int[3]; 
+
+
+int  peak_performance , fat_burn , cardio , jogg;
+int startTimer;
+float lastBeatVal;
+PImage work_out;
 //-------------------------------------------------------------
 
 void high_low_setup() {
@@ -15,107 +21,115 @@ void high_low_setup() {
   
   //restingHeartRate = int(random(60, 81));
   
+  peak_performance = fat_burn = cardio = jogg = 0;
+  startTimer = second();
+  lastBeatVal = 0;
+  
   restingHeartRate = 60;
   timeInterval = 30;
   
-  // Initialize heartRateData array with random values for testing
-  heartRateData = new int[timeInterval];
-  for (int i = 0; i < timeInterval; i++) {
-    heartRateData[i] = restingHeartRate + int(random(-5, 6)); // Simulate small variations
-  }
   
-  
-  calculateZones();
+  //calculateZones();
   high_low_draw();
   //-----------------------------------------------------------
 }
 
-//
-//void keyPressed() {
-//  // Generate new random heart rates when a key is pressed
-//  generateRandomHeartRates();
-//  calculateZones();
-//}
-//
-
 void high_low_draw() {
   
+  //draw a card around the graph
+  
+  float cardWidth = 500;
+  float cardHeight = 250;
+  float cardX = 200 - cardWidth / 2;
+  float cardY = (height / 2) - cardHeight / 2 + 20;
+  //
+ work_out = loadImage("workout.jpg");
+ 
+ h_font = createFont("h_font.ttf",12);
+ textFont(h_font);  
  /////////
- background(169, 209, 245);
+ background(work_out);
+ 
+ //card values
+  fill(249,215,232,255);
+  stroke(0);
+  strokeWeight(0.1);
+  rect(cardX, cardY, cardWidth, cardHeight);
+ ////
+ 
+  zone_bars("Peak Performance", peak_performance, color(154, 3, 30), 160, 180);
+  zone_bars("Intense Fat Burn", fat_burn, color(227, 100, 20), 160, 240);
+  zone_bars("Cardio Workout", cardio, color(101, 183, 65), 160, 300);
+  zone_bars("Light Jog", jogg, color(187, 226, 236), 160, 360);
 
  
- float barWidth = width / 3.5;
-  
-  // Draw bars for each cardiac zone
-  for (int i = 0; i < zoneCounts.length; i++) {
-    float x = i * barWidth + 50;
-    float barHeight = map(zoneCounts[i], 0, timeInterval, 0, height - 50);
-    fill(100 + i * 50, 150 - i * 50, 200 + i * 30);
-    rect(x, height - barHeight - 50, barWidth, barHeight);
-    
-    // Display zone labels
-    textAlign(CENTER);
-    fill(0);
-    text(getZoneLabel(i), x + barWidth/2, height - 30);
-  }
- ////////
  
-  //pushStyle();
+  fill(0);
+  text("Total Time Active: "+ minute() + " minutes", width/2, 20);
+  text("Peak Performance Mode Time: " +  peak_performance + " seconds", 20, 50);
+  text("Intense Fat Burn Time: " +  fat_burn + " seconds", 20, 80);
+  text("Cardio Workout Time: " +  cardio + " seconds", 20, 110);
+  text("Light Jog Time: " + jogg + " seconds", 20, 140);
   
-  //background(185,160,217);
-  //String output = "LOW HR: " + low_HR + "  HIGH HR: " + high_HR;
-  //textSize(30);
-  //fill(204, 102, 0);
-  //textAlign(CENTER, CENTER);
-  //text(output, width/2, 90);
-  //popStyle();
+  
+  
+  //check with random values // comment this out and go to high_low serial event to check with incoming heartbeat
+  float newHeartbeatValue = random(60, 120);
+  zone_time(lastBeatVal, newHeartbeatValue);
+  lastBeatVal = newHeartbeatValue;
+  /////
+  
   
   home_button();
-  //high_low_draw();
   
 
 }
 
-///////////////////////////
+void zone_bars(String label, int time, color col, int x, int y) {
+  fill(col);
+  rect(x, y, time, 40);
+  fill(0);
+  text(label, x - 120, y + 25);
+  text(time + " s", x + time + 5, y + 25);
+}
 
-String getZoneLabel(int index) {
-  switch (index) {
-    case 0:
-      return "Slight Workout";
-    case 1:
-      return "Moderate Workout";
-    case 2:
-      return "Maximum Workout";
-    default:
-      return "";
+
+void zone_time(float last_heart_beat, float curr_heart_beat) {
+  int currentTime = second();
+  int elapsedTime;
+
+//handle time so it doesnt go negative
+  if (currentTime >= startTimer) {
+    elapsedTime = currentTime - startTimer;
+  } else {
+    // 
+    elapsedTime = (60 - startTimer) + currentTime;
   }
-}
-///////////////////////////
-//////////////////////////
-void calculateZones() {
-  for (int i = 0; i < heartRateData.length; i++) {
-    int heartRate = heartRateData[i];
-    float percentIncrease = ((float) (heartRate - restingHeartRate) / restingHeartRate) * 100;
-    
-    if (percentIncrease < 20) {
-      zoneCounts[0]++; // Slight workout
-    } else if (percentIncrease >= 20 && percentIncrease <= 50) {
-      zoneCounts[1]++; // Moderate workout
-    } else if (percentIncrease > 50) {
-      zoneCounts[2]++; // Maximum workout
-    }
+  
+  
+
+  if (last_heart_beat > 110) { //cardiac zone 1
+    peak_performance += elapsedTime;
+  } else if (last_heart_beat >= 90 && last_heart_beat <= 110) { //cardiac zone 2
+    fat_burn += elapsedTime;
+  } else if (last_heart_beat >= 80 && last_heart_beat < 90) {//cardiac zone 3 
+    cardio += elapsedTime;
+  } else { //cardiac zone 4
+    jogg += elapsedTime;
   }
-}
-/////////////////////////
-void generateRandomHeartRates() {
-  for (int i = 0; i < timeInterval; i++) {
-    heartRateData[i] = restingHeartRate + int(random(-5, 6)); // Simulate small variations
-  }
+
+  startTimer = currentTime; // restart timer
 }
 
 //
 
 void high_low_serialEvent(float val) {
+  
+  //comment this in
+  zone_time(lastBeatVal, val);
+  lastBeatVal = val;
+  /////////////////////
+  
   if (val < low_HR)
     low_HR = val;
     
