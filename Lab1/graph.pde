@@ -3,6 +3,7 @@ FloatList lineChartX;
 FloatList lineChartY;
 
 int count;
+int pointColor = 0;
 
 void graph_setup() {
   lineChart = new XYChart(this);
@@ -17,24 +18,42 @@ void graph_setup() {
   lineChart.setYFormat("00");
   lineChart.setXFormat("0");
   
-  //lineChart.setPointColour(color(180, 50, 100, 100));
+  //lineChart.setPointColour(0);
+  int initialLineColor = color(187, 226, 236); // light jog
   lineChart.setPointSize(5);
   lineChart.setLineWidth(2);
-  
+
   count = 0;
 }
 
 void graph_draw() {
-  background(185,160,217);
+  //background(185,160,217);
+  //int pointColor = 0;
+  background(0);
   textSize(9);
   
+  stroke(pointColor);
   lineChart.draw(15, 15, width - 30, height - 30);
-  fill(200);
+
+  
+  fill(0);
   rect(500, 200, 0, 0);
   
   fill(120);
   textSize(20);
   text("User's Heart Beat", 70, 30);
+  for (int i = 0; i < lineChartX.size() - 1; i++) {
+    int lineColor = Color_lines(lineChartY.get(i));
+    stroke(lineColor);
+    strokeWeight(2);
+    line(
+      map(i, 0, lineChartX.size() - 1, 15, width - 30),
+      map(lineChartY.get(i), 0, lineChart.getMaxY(), height - 30, 15),
+      map(i + 1, 0, lineChartX.size() - 1, 15, width - 30),
+      map(lineChartY.get(i + 1), 0, lineChart.getMaxY(), height - 30, 15)
+    );
+  }
+  text(pointColor, width/2, height/2);
   
   home_button();
   
@@ -56,6 +75,7 @@ void graph_serialEvent(float val) {
   
   int pointColor = Color_lines(val);
   lineChart.setPointColour(pointColor);
+  //lineChart.setLineColor(pointColor);
 
   lineChart.setData(lineChartX.array(), lineChartY.array());
 }
