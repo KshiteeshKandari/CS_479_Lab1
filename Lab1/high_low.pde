@@ -2,7 +2,7 @@ float high_HR;
 float low_HR;
 //------------------------------------------------------------
 int restingHeartRate;
-int[] heartRateData;
+
 int timeInterval; // Time interval in seconds for data collection
 int[] zoneCounts = new int[3]; 
 

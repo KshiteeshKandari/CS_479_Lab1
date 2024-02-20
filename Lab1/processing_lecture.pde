@@ -8,12 +8,13 @@ Serial myPort;
 
 String tab = "intro";
 
+float val;
 float oxy;
 float confidence;
 
 
 void setup() {
-  String portName = Serial.list()[1];
+  String portName = Serial.list()[0];
   print(Serial.list());
   myPort = new Serial(this, portName, 115200);
   myPort.bufferUntil('\n');
@@ -51,7 +52,7 @@ void serialEvent(Serial myPort) {
     
     ///////////////////////
     String[] values = split(tempVal, ' '); 
-    float val = float(values[0]);
+    val = float(values[0]);
     oxy = float(values[1]);
     confidence = float(values[2]);
     

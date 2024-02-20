@@ -2,6 +2,12 @@ XYChart lineChart;
 FloatList lineChartX;
 FloatList lineChartY;
 
+//
+int counTer = 0;
+float rst = 0.0;
+float avgBeat = 0.0;
+//
+
 int count;
 int pointColor = 0;
 
@@ -56,11 +62,28 @@ void graph_draw() {
   
   
   home_button();
-  text("Blood Oxygen Levels: " + oxy, width-300, height-100);
+  fill(255);
+  text("Blood Oxygen Levels: " + oxy+ "%", width-300, height-100);
   text("Confidence Level: " + confidence, width-300, height-80);
-  
+  text("HeartBeat: " + val + " BPM", width-900, height-100);
+  //fill(0,191,255);
+  //text("Resting HeartRate: " + avgBeat + "BPM",width-900,height-80);
+  noFill();
 
 }
+
+//void resting_heartRate(float val){
+//  while (counTer < 10){
+//    rst += val;
+//    counTer++;
+//  }
+//  if(counTer == 10){
+//  avgBeat = rst / 10;
+//  }
+//  else{
+//  avgBeat = 0.0;}
+  
+//}
 
 void graph_serialEvent(float val, float oxy) {
   count++;
