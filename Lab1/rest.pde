@@ -71,7 +71,7 @@ void stressed_out_serialEvent(float val){
   //stressed_heart_rate = (resting_heart_rate*0.25) + resting_heart_rate; // 25% increase in heart rate. I don't know what normal stressed heart rate is comared to resting heart rate.
   //if (val >= stressed_heart_rate){
 
-  if (val >= (220-22)* .60){ // can swap this with the 4 lines above^^ This is just if you have a heart rate above 75, you're stressed.
+  if (val >= .65 * (220-22)){ // can swap this with the 4 lines above^^ This is just if you have a heart rate above 75, you're stressed.
     stressed = true;
   }
   else{

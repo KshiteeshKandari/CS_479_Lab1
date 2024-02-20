@@ -48,9 +48,9 @@ void graph_draw() {
     strokeWeight(2);
     line(
       map(i, 0, lineChartX.size() - 1, 15, width - 30),
-      map(lineChartY.get(i), 0, lineChart.getMaxY(), height - 30, 15),
+      map(lineChartY.get(i), 0, lineChart.getMaxY(), height, 15),
       map(i + 1, 0, lineChartX.size() - 1, 15, width - 30),
-      map(lineChartY.get(i + 1), 0, lineChart.getMaxY(), height - 30, 15)
+      map(lineChartY.get(i + 1), 0, lineChart.getMaxY(), height, 15)
     );
   }
   
@@ -90,7 +90,7 @@ void graph_serialEvent(float val, float oxy) {
 
 
 int Color_lines(float heartbeatValue) {
-  if (heartbeatValue > 110) {
+  if (heartbeatValue > .80*(220-22)) {
     return color(154, 3, 30); // peak_performance
   } else if (heartbeatValue >= 90 && heartbeatValue <= 110) {
     return color(227, 100, 20); // fat_burn
