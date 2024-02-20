@@ -5,6 +5,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.println((int) random(70, 120));
+  Serial.print((int) random(70, 120));
+  Serial.print(" ");
+  Serial.print((int) random(80, 130));
+  Serial.print(" ");
+  Serial.println((int) random(90, 140));
+
   delay(500);
 }

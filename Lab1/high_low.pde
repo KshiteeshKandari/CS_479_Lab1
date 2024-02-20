@@ -123,12 +123,14 @@ void zone_time(float last_heart_beat, float curr_heart_beat) {
 
 //
 
-void high_low_serialEvent(float val) {
+void high_low_serialEvent(float val, float oxy) {
   
   //comment this in
   zone_time(lastBeatVal, val);
   lastBeatVal = val;
   /////////////////////
+  
+  //text(oxy, width/2 , height/2);
   
   if (val < low_HR)
     low_HR = val;

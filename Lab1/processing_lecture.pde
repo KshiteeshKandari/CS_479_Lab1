@@ -3,15 +3,18 @@ import org.gicentre.utils.stat.*;
 //import processing.sound.*;
 
 
-
+String input1 = "73 12 23\n";
 Serial myPort;
 
 String tab = "intro";
 
+float oxy;
+float confidence;
+
 
 void setup() {
-  String portName = Serial.list()[0];
-  print(Serial.list()[0]);
+  String portName = Serial.list()[1];
+  print(Serial.list());
   myPort = new Serial(this, portName, 115200);
   myPort.bufferUntil('\n');
   
@@ -23,6 +26,8 @@ void setup() {
 }
 
 void draw() {
+  
+  //serialEvent(input1);
   if (tab == "intro")
     intro_draw();
   
@@ -39,13 +44,24 @@ void draw() {
 void serialEvent(Serial myPort) {
   String tempVal = myPort.readStringUntil('\n');
   
+   //print(tempVal);
+  
+  
   if (tempVal != null) {
-    tempVal = trim(tempVal);
-    float val = float(tempVal);
-    high_low_serialEvent(val);
-    graph_serialEvent(val);
+    
+    ///////////////////////
+    String[] values = split(tempVal, ' '); 
+    float val = float(values[0]);
+    oxy = float(values[1]);
+    confidence = float(values[2]);
+    
+    //////////////////////
+    //tempVal = trim(tempVal);
+    //float val = float(tempVal);
+    high_low_serialEvent(val,oxy);
+    graph_serialEvent(val,oxy);
     stressed_out_serialEvent(val);
-    println(val);
+    //println(val);
   }
   //float newHeartbeatValue = random(60, 120);
   //graph_serialEvent(newHeartbeatValue);

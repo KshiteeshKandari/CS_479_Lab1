@@ -53,14 +53,16 @@ void graph_draw() {
       map(lineChartY.get(i + 1), 0, lineChart.getMaxY(), height - 30, 15)
     );
   }
-  text(pointColor, width/2, height/2);
+  
   
   home_button();
+  text("Blood Oxygen Levels: " + oxy, width-300, height-100);
+  text("Confidence Level: " + confidence, width-300, height-80);
   
 
 }
 
-void graph_serialEvent(float val) {
+void graph_serialEvent(float val, float oxy) {
   count++;
   
   lineChartX.append(count);
@@ -78,7 +80,14 @@ void graph_serialEvent(float val) {
   //lineChart.setLineColor(pointColor);
 
   lineChart.setData(lineChartX.array(), lineChartY.array());
+  //oxyLevels.append(oxy);
+  
+  
+  
+  //print(oxy);
 }
+
+
 
 int Color_lines(float heartbeatValue) {
   if (heartbeatValue > 110) {
