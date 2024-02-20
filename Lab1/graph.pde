@@ -59,6 +59,7 @@ void graph_draw() {
       map(lineChartY.get(i + 1), 0, lineChart.getMaxY(), height, 15)
     );
   }
+  resting_heartRate(val);
   
   
   home_button();
@@ -66,24 +67,26 @@ void graph_draw() {
   text("Blood Oxygen Levels: " + oxy+ "%", width-300, height-100);
   text("Confidence Level: " + confidence, width-300, height-80);
   text("HeartBeat: " + val + " BPM", width-900, height-100);
-  //fill(0,191,255);
-  //text("Resting HeartRate: " + avgBeat + "BPM",width-900,height-80);
+  fill(0,191,255);
+  text("Resting HeartRate: " + avgBeat + "BPM",width-900,height-80);
   noFill();
 
 }
 
-//void resting_heartRate(float val){
-//  while (counTer < 10){
-//    rst += val;
-//    counTer++;
-//  }
-//  if(counTer == 10){
-//  avgBeat = rst / 10;
-//  }
-//  else{
-//  avgBeat = 0.0;}
+void resting_heartRate(float val){
+  while (counTer < 10){
+    rst += val;
+    counTer++;
+  }
+  if(counTer == 10){
+  avgBeat = rst / 10;
+  }
+  else{
+  avgBeat = 0.0;}
   
-//}
+  //print(counTer);
+  
+}
 
 void graph_serialEvent(float val, float oxy) {
   count++;
