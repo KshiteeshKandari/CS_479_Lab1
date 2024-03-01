@@ -42,6 +42,8 @@ void intro_draw() {
   PImage b1;
   PImage b2;
   PImage b3;
+  PImage b5;
+  PImage b6;
 
   //PImage b4;
 
@@ -58,6 +60,8 @@ void intro_draw() {
   b3 = loadImage("b3.png");
   s = loadImage("s.png");
   r = loadImage("r.png");
+  b5 = loadImage("lungs.png");
+  b6 = loadImage("hrm.png");
   
   //b4 = loadImage("b4.png");
   
@@ -74,9 +78,9 @@ void intro_draw() {
   h_font = createFont("h_font.ttf",22);
   textFont(h_font);
   
-  image(b1,width/8,height/3,100,100);
-  text("HeartBeat Graph", 170, 150);
-  if (mouseX > width/8 && mouseX < width/8 + 100 && mouseY > height/3 && mouseY < height/3 +100) {
+  image(b1,width/8,height/5,100,100);
+  text("HeartBeat Graph", 170, height/5 -40);
+  if (mouseX > width/8 && mouseX < width/8 + 100 && mouseY > height/5 && mouseY < height/5 +100) {
      if (mousePressed) {
         i1Clicked = true;  // Set the imageClicked variable to true
       }
@@ -85,18 +89,18 @@ void intro_draw() {
   
   
   
-  image(b2,440,height/3,100,100);
-  text("CardioZones", width/2, 150);
-   if (mouseX > 440 && mouseX < 540 && mouseY > height/3 && mouseY < height/3 +100) {
+  image(b2,440,height/5,100,100);
+  text("CardioZones", width/2, height/5 - 40);
+   if (mouseX > 440 && mouseX < 540 && mouseY > height/5 && mouseY < height/5 +100) {
      if (mousePressed) {
         i2Clicked = true;  // Set the imageClicked variable to true
       }
   }
   if (i2Clicked){tab = "high_low";}
   
-  image(b3,750,height/3,100,100);
-  text("Meditation", width-170, 150);
-     if (mouseX > 750 && mouseX < 850 && mouseY > height/3 && mouseY < height/3 +100) {
+  image(b3,750,height/5,100,100);
+  text("Meditation", width-170, height/5- 40);
+     if (mouseX > 750 && mouseX < 850 && mouseY > height/5 && mouseY < height/5 +100) {
      if (mousePressed) {
         i3Clicked = true;  // Set the imageClicked variable to true
       }
@@ -104,7 +108,23 @@ void intro_draw() {
   if (i3Clicked){tab = "rest";}
   
   
-
+  image(b5,width/4,height/2,100,100);
+  text("Respiratory Rate", width/4-90, height/2+45);
+     if (mouseX > width/4 && mouseX < width/4 + 100 && mouseY > height/2 && mouseY < height/2 +100) {
+     if (mousePressed) {
+        i3Clicked = true;  // Set the imageClicked variable to true
+      }
+  }
+  if (i3Clicked){tab = "heart";}
+  
+  image(b6,width - 400 ,height/2,100,100);
+  text("Heart Rate", width - 240, height/2+45);
+     if (mouseX > width - 400 && mouseX < width - 400 + 100 && mouseY > height/2 && mouseY < height/2 +100) {
+     if (mousePressed) {
+        i3Clicked = true;  // Set the imageClicked variable to true
+      }
+  }
+  if (i3Clicked){tab = "resp";}
   
   
   popStyle();
