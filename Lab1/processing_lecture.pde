@@ -3,7 +3,7 @@ import org.gicentre.utils.stat.*;
 //import processing.sound.*;
 
 
-//String input1 = "73 12 23\n";
+String input1 = "73 12 23\n";
 Serial myPort;
 
 String tab = "intro";
@@ -14,10 +14,10 @@ float confidence;
 
 
 void setup() {
-  String portName = Serial.list()[1];
-  print(Serial.list());
-  myPort = new Serial(this, portName, 115200);
-  myPort.bufferUntil('\n');
+  //String portName = Serial.list()[0];
+  //print(Serial.list());
+  //myPort = new Serial(this, portName, 115200);
+  //myPort.bufferUntil('\n');
   
   size(986, 540);
   
