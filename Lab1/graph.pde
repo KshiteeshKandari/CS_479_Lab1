@@ -65,7 +65,7 @@ void graph_draw() {
   home_button();
   fill(255);
   text("Blood Oxygen Levels: " + oxy+ "%", width-300, height-100);
-  text("Confidence Level: " + confidence, width-300, height-80);
+  //text("Confidence Level: " + confidence, width-300, height-80);
   text("HeartBeat: " + val + " BPM", width-900, height-100);
   fill(0,191,255);
   text("Resting HeartRate: " + avgBeat + "BPM",width-900,height-80);

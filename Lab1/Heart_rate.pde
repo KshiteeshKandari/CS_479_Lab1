@@ -31,6 +31,30 @@ void calculateBPM(int signal) {
   BPM = constrain(BPM, 30, 300); // Adjust these values as needed
   beat_old = scaled_millis;
   beatIndex = (beatIndex + 1) % 500;  // cycle through the array instead of using FIFO queue
+<<<<<<< HEAD
+  }
+  float calculateBaselineHeartbeat() {
+  float total = 0.0;
+  for (int i = 0; i < 500; i++) {
+    total += beats[i];
+  }
+  return total / 500;
+}
+
+void heart_rate_draw() {
+  background(169, 209, 245);
+  generateRandomData();
+  drawGraph();
+  //home_button();
+}
+
+void generateRandomData() {
+  // Generate random heart rate data
+  for (int i = 0; i < 500; i++) {
+    beats[i] = random(300, 700); // Generate random BPM values between 50 and 150
+  }
+=======
+>>>>>>> ded738bca6a41fef9419e7c0d7101efaaec42913
 }
 
 
