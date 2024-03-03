@@ -5,17 +5,17 @@ int beatIndex = 0; // Initialize beatIndex to 0
 float threshold = 620.0;  //Threshold at which BPM calculation occurs
 boolean belowThreshold = true;
 
-void setup() {
-  // Add setup code if necessary
-  size(200, 200); // Adjust the canvas size according to your needs
-}
+//void setup() {
+//  // Add setup code if necessary
+//  size(200, 200); // Adjust the canvas size according to your needs
+//}
 
-void draw() {
-  // Add draw code if necessary
-  int randomSignal = int(random(300, 701)); // Generate random signal between 300 and 700
-  calculateBPM(randomSignal); // Call calculateBPM with the random signal
-  println("Current BPM: " + BPM); // Print the calculated BPM
-}
+//void draw() {
+//  // Add draw code if necessary
+//  int randomSignal = int(random(300, 701)); // Generate random signal between 300 and 700
+//  calculateBPM(randomSignal); // Call calculateBPM with the random signal
+//  println("Current BPM: " + BPM); // Print the calculated BPM
+//}
 
 void calculateBPM(int signal) {
   int scaled_millis = millis() * 200; // Scale millis() to make it slower
@@ -34,7 +34,7 @@ void calculateBPM(int signal) {
 }
 
 
-void res_rate_draw(){
+void heart_rate_draw(){
   
 background(169, 209, 245);
 home_button();
