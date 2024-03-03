@@ -40,6 +40,14 @@ void draw() {
   
   else if (tab == "rest")
     rest_draw();
+  
+  else if (tab == "heart")
+    heart_rate_draw();
+    
+  else if (tab == "resp")
+    res_rate_draw();
+   
+   
 }
 
 void serialEvent(Serial myPort) {
