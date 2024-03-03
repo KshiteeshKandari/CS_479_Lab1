@@ -14,10 +14,10 @@ float confidence;
 
 
 void setup() {
-  String portName = Serial.list()[0];
-  print(Serial.list());
-  myPort = new Serial(this, portName, 115200);
-  myPort.bufferUntil('\n');
+  //String portName = Serial.list()[0];
+  //print(Serial.list());
+  //myPort = new Serial(this, portName, 115200);
+  //myPort.bufferUntil('\n');
   
   size(986, 540);
   
