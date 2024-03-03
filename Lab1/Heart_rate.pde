@@ -31,7 +31,7 @@ void heart_rate_draw() {
   background(169, 209, 245);
   generateRandomData();
   drawGraph();
-  home_button();
+  //home_button();
 }
 
 void generateRandomData() {

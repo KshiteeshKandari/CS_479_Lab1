@@ -14,10 +14,10 @@ float confidence;
 
 
 void setup() {
-  //String portName = Serial.list()[0];
-  //print(Serial.list());
-  //myPort = new Serial(this, portName, 115200);
-  //myPort.bufferUntil('\n');
+  String portName = Serial.list()[0];
+  print(Serial.list());
+  myPort = new Serial(this, portName, 115200);
+  myPort.bufferUntil('\n');
   
   size(986, 540);
   
@@ -62,7 +62,7 @@ void serialEvent(Serial myPort) {
     String[] values = split(tempVal, ' '); 
     val = float(values[0]);
     oxy = float(values[1]);
-    confidence = float(values[2]);
+    //confidence = float(values[2]);
     
     //////////////////////
     //tempVal = trim(tempVal);
@@ -70,6 +70,7 @@ void serialEvent(Serial myPort) {
     high_low_serialEvent(val,oxy);
     graph_serialEvent(val,oxy);
     stressed_out_serialEvent(val);
+    res_rate_serialEvent(oxy);
     //println(val);
   }
   //float newHeartbeatValue = random(60, 120);
