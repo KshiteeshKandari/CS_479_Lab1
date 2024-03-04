@@ -36,7 +36,8 @@ void intro_draw() {
   boolean i1Clicked= false;
   boolean i2Clicked= false;
   boolean i3Clicked= false;
-  //boolean i4Clicked= false;
+  boolean i4Clicked= false;
+  boolean i5Clicked = false;
     
   PImage img;
   PImage b1;
@@ -112,19 +113,19 @@ void intro_draw() {
   text("Respiratory Rate", width/4-90, height/2+45);
      if (mouseX > width/4 && mouseX < width/4 + 100 && mouseY > height/2 && mouseY < height/2 +100) {
      if (mousePressed) {
-        i3Clicked = true;  // Set the imageClicked variable to true
+        i4Clicked = true;  // Set the imageClicked variable to true
       }
   }
-  if (i3Clicked){tab = "heart";}
+  if (i4Clicked){tab = "resp";}
   
   image(b6,width - 400 ,height/2,100,100);
   text("Heart Rate", width - 240, height/2+45);
      if (mouseX > width - 400 && mouseX < width - 400 + 100 && mouseY > height/2 && mouseY < height/2 +100) {
      if (mousePressed) {
-        i3Clicked = true;  // Set the imageClicked variable to true
+        i5Clicked = true;  // Set the imageClicked variable to true
       }
   }
-  if (i3Clicked){tab = "resp";}
+  if (i5Clicked){tab = "heart";}
   
   
   popStyle();
