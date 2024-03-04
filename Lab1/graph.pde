@@ -88,11 +88,11 @@ void resting_heartRate(float val){
   
 }
 
-void graph_serialEvent(float val, float oxy) {
+void graph_serialEvent(float valx, float oxy) {
   count++;
   
   lineChartX.append(count);
-  lineChartY.append(val);
+  lineChartY.append(valx);
   
   if (lineChartX.size() > 7 && lineChartY.size() > 7) {
     lineChartX.remove(0);

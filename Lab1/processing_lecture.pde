@@ -11,10 +11,18 @@ String tab = "intro";
 float val;
 float oxy;
 float confidence;
+int respiratoryRate = 0;
+
+float inhalationTime = 0.0;
+float exhalationTime = 0.0;
+boolean isInhalation = false; 
+float lowestValue = Float.MAX_VALUE;
+float peakValue = Float.MIN_VALUE;
+float startTime = 0.0;
 
 
 void setup() {
-  String portName = Serial.list()[0];
+  String portName = Serial.list()[1];
   print(Serial.list());
   myPort = new Serial(this, portName, 115200);
   myPort.bufferUntil('\n');
@@ -24,6 +32,7 @@ void setup() {
   
   graph_setup();
   high_low_setup();
+  resp_graph_setup();
 }
 
 void draw() {

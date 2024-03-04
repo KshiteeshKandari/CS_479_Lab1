@@ -90,7 +90,7 @@ void zone_bars(String label, int time, color col, int x, int y) {
   rect(x, y, time, 40);
   fill(0);
   text(label, x - 120, y + 25);
-  text(time + " s", x + time + 5, y + 25);
+  text(time + "s", x + time + 5, y + 25);
 }
 
 

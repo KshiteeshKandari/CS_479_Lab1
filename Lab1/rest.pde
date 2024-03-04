@@ -18,6 +18,8 @@ float scalingSpeed = 0.02;
 
 void rest_draw() {
   
+  res_rate_draw();
+
   float shakeFactor = sin(frameCount * scalingSpeed);
 
   // Apply the scaling factor to the image size
@@ -27,7 +29,11 @@ void rest_draw() {
   font = createFont("C.ttf", 50);
   pushStyle();
    background(169, 209, 245);
-  
+   
+  //implement breathing rate
+  //stress
+  if (respiratoryRate > 7){stressed = true;}
+  else{stressed = false;}
   //==============================
   if(stressed){
     image(s, width / 2 - scaledWidth / 2, height / 2 - scaledHeight / 2, scaledWidth, scaledHeight);
@@ -46,6 +52,7 @@ void rest_draw() {
   //==============================
 
   home_button();
+  println(respiratoryRate);
 }
 
 void keyPressed() {
@@ -67,4 +74,6 @@ void stressed_out_serialEvent(float val){
   else{
     stressed = false;
   }
+
+  
 }
