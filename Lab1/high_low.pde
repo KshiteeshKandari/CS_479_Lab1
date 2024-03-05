@@ -11,6 +11,12 @@ int  peak_performance , fat_burn , cardio , jogg;
 int startTimer;
 float lastBeatVal;
 PImage work_out;
+
+int tempRes_1 = 0;
+int tempRes_2 = 0;
+int tempRes_3 = 0;
+int tempRes_4 = 0;
+
 //-------------------------------------------------------------
 
 void high_low_setup() {
@@ -38,7 +44,7 @@ void high_low_draw() {
   
   //draw a card around the graph
   
-  float cardWidth = 500;
+  float cardWidth = width;
   float cardHeight = 250;
   float cardX = 200 - cardWidth / 2;
   float cardY = (height / 2) - cardHeight / 2 + 20;
@@ -60,16 +66,16 @@ void high_low_draw() {
   zone_bars("Peak Performance", peak_performance, color(154, 3, 30), 160, 180);
   zone_bars("Cardio Workout", fat_burn, color(227, 100, 20), 160, 240);
   zone_bars("Intense Fat Burn", cardio, color(101, 183, 65), 160, 300);
-  zone_bars("Resting/Recovery", jogg, color(187, 226, 236), 160, 360);
+  zone_bars("Resting/Recovery", jogg , color(187, 226, 236), 160, 360);
 
  
  
   fill(0);
   text("Total Time Active: "+ millis()/1000 + " seconds", width/2, 20);
-  text("Peak Performance Mode Time: " +  peak_performance + " seconds", 20, 50);
-  text("Cardio Workout Time: " +  fat_burn + " seconds", 20, 80);
-  text("Intense Fat Burn Time: " +  cardio + " seconds", 20, 110);
-  text("Resting/Recovery Time: " + jogg + " seconds", 20, 140);
+  text("Peak Performance Mode Time: " +  peak_performance + " seconds    "+"Respiratory Rate: "+ tempRes_1, 20, 50);
+  text("Cardio Workout Time: " +  fat_burn + " seconds    "+"Respiratory Rate: "+ tempRes_2, 20, 80);
+  text("Intense Fat Burn Time: " +  cardio + " seconds    "+"Respiratory Rate: "+ tempRes_3, 20, 110);
+  text("Resting/Recovery Time: " + jogg + " seconds    "+"Respiratory Rate: "+ tempRes_4, 20, 140);
   
   
   
@@ -110,12 +116,16 @@ void zone_time(float last_heart_beat, float curr_heart_beat) {
 
   if (last_heart_beat > .8*(220-22)) { //cardiac zone 1
     peak_performance += elapsedTime;
+    tempRes_1 = respiratoryRate;
   } else if (last_heart_beat >= .7*(220-22) && last_heart_beat <= .8*(220-22)) { //cardiac zone 2
     cardio += elapsedTime;
+    tempRes_2 = respiratoryRate;
   } else if (last_heart_beat >= .6*(220-22) && last_heart_beat < .7*(220-22)) {//cardiac zone 3 
     fat_burn += elapsedTime;
+    tempRes_3 = respiratoryRate;
   } else { //cardiac zone 4
     jogg += elapsedTime;
+    tempRes_4 = respiratoryRate;
   }
 
   startTimer = currentTime; // restart timer

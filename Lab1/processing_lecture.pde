@@ -69,8 +69,21 @@ void serialEvent(Serial myPort) {
     
     ///////////////////////
     String[] values = split(tempVal, ' '); 
+    
+    //print(values[0]);
+    //print(" ");
+    //println(values[1]);
+   if (values[0].equals("!") || values[0].equals(null)) {
+      values[0] = "100"; // Replace with "0"
+    }
+    
+    if (values[1].equals(null)) {
+      values[1] = "100"; // Replace with "0"
+    }
     val = float(values[0]);
     oxy = float(values[1]);
+    
+    
     //confidence = float(values[2]);
     
     //////////////////////
@@ -82,6 +95,7 @@ void serialEvent(Serial myPort) {
     res_rate_serialEvent(oxy);
     //println(val);
   }
+  else{print("error here");}
   //float newHeartbeatValue = random(60, 120);
   //graph_serialEvent(newHeartbeatValue);
 }

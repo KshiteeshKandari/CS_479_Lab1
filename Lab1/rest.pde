@@ -32,7 +32,7 @@ void rest_draw() {
    
   //implement breathing rate
   //stress
-  if (respiratoryRate > 7){stressed = true;}
+  if (respiratoryRate > 15){stressed = true;}
   else{stressed = false;}
   //==============================
   if(stressed){

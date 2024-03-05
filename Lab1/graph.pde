@@ -6,6 +6,19 @@ FloatList lineChartY;
 int counTer = 0;
 float rst = 0.0;
 float avgBeat = 0.0;
+//bpm calculations
+
+float inByte = 0;
+int BPM = 0;
+int beat_old = 0;
+float[] beats = new float[500];  // Used to calculate average BPM
+int beatIndex;
+float threshold = 500.0;  //Threshold at which BPM calculation occurs
+boolean belowThreshold = true;
+
+
+
+ArrayList<Integer> peakTimes = new ArrayList<Integer>();
 //
 
 int count;
@@ -48,29 +61,41 @@ void graph_draw() {
   fill(120);
   textSize(20);
   text("User's Heart Beat", 70, 30);
-  for (int i = 0; i < lineChartX.size() - 1; i++) {
-    int lineColor = Color_lines(lineChartY.get(i));
-    stroke(lineColor);
-    strokeWeight(2);
-    line(
-      map(i, 0, lineChartX.size() - 1, 15, width - 30),
-      map(lineChartY.get(i), 0, lineChart.getMaxY(), height, 15),
-      map(i + 1, 0, lineChartX.size() - 1, 15, width - 30),
-      map(lineChartY.get(i + 1), 0, lineChart.getMaxY(), height, 15)
-    );
-  }
+  
+  
   resting_heartRate(val);
   
   
   home_button();
   fill(255);
-  text("Blood Oxygen Levels: " + oxy+ "%", width-300, height-100);
+  //text("Blood Oxygen Levels: " + oxy+ "%", width-300, height-100);
   //text("Confidence Level: " + confidence, width-300, height-80);
-  text("HeartBeat: " + val + " BPM", width-900, height-100);
+  
   fill(0,191,255);
-  text("Resting HeartRate: " + avgBeat + "BPM",width-900,height-80);
-  noFill();
+  //text("Resting HeartRate: " + avgBeat + "BPM",width-900,height-80);
+  if (frameCount % 120 == 0) { // Assuming 60 FPS, adjust according to your actual frame rate
+        BPM = calculateBPM(); // Update BPM based on the peaks detected in the last 60 seconds
+        //println("Current BPM: " + BPM); // Optionally print it to the console for debugging
+    }
 
+    // Display the BPM on the screen
+    fill(255); // White color for text
+    text("BPM: " + BPM, 10, height - 10); // Position the text at the bottom left
+
+  noFill();
+  
+   // Apply the moving average filter to smooth the data
+ // Adjust window size as needed for smoothing
+  
+  // Draw the ECG graph as a continuous line
+  stroke(255, 0, 0); // Set the stroke color to red
+  strokeWeight(2); // Set the stroke weight to match the ECG's line thickness
+  noFill();
+ 
+  
+
+  
+  
 }
 
 void resting_heartRate(float val){
@@ -94,7 +119,7 @@ void graph_serialEvent(float valx, float oxy) {
   lineChartX.append(count);
   lineChartY.append(valx);
   
-  if (lineChartX.size() > 7 && lineChartY.size() > 7) {
+  if (lineChartX.size() > 50 && lineChartY.size() > 50) {
     lineChartX.remove(0);
     lineChartY.remove(0);
   }
@@ -105,10 +130,22 @@ void graph_serialEvent(float valx, float oxy) {
   lineChart.setPointColour(pointColor);
   //lineChart.setLineColor(pointColor);
 
+
   lineChart.setData(lineChartX.array(), lineChartY.array());
   //oxyLevels.append(oxy);
   
   
+   // BPM calculation check
+   if (valx > threshold && belowThreshold) {
+        belowThreshold = false;
+        peakTimes.add(millis());
+    } else if (valx < threshold) {
+        belowThreshold = true;
+    }
+  
+    BPM = calculateBPM();
+ 
+     
   
   //print(oxy);
 }
@@ -125,4 +162,13 @@ int Color_lines(float heartbeatValue) {
   } else {
     return color(187, 226, 236); // light jog
   }
+}
+
+//////calculate BPM
+int calculateBPM() {
+    int currentTime = millis();
+    // Remove peaks that are more than 60 seconds old
+    peakTimes.removeIf(time -> (currentTime - time) > 60000);
+    // The size of peakTimes now represents the number of peaks in the last 60 seconds
+    return peakTimes.size();
 }

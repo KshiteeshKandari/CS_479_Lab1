@@ -45,6 +45,7 @@ void intro_draw() {
   PImage b3;
   PImage b5;
   PImage b6;
+  PImage Mo;
 
   //PImage b4;
 
@@ -63,6 +64,7 @@ void intro_draw() {
   r = loadImage("r.png");
   b5 = loadImage("lungs.png");
   b6 = loadImage("hrm.png");
+ 
   
   //b4 = loadImage("b4.png");
   
@@ -99,8 +101,8 @@ void intro_draw() {
   }
   if (i2Clicked){tab = "high_low";}
   
-  image(b3,750,height/5,100,100);
-  text("Meditation", width-170, height/5- 40);
+  image(b6,750,height/5,100,100);
+  text("Stress", width-190, height/5- 40);
      if (mouseX > 750 && mouseX < 850 && mouseY > height/5 && mouseY < height/5 +100) {
      if (mousePressed) {
         i3Clicked = true;  // Set the imageClicked variable to true
@@ -118,8 +120,8 @@ void intro_draw() {
   }
   if (i4Clicked){tab = "resp";}
   
-  image(b6,width - 400 ,height/2,100,100);
-  text("Heart Rate", width - 240, height/2+45);
+  image(b3,width - 400 ,height/2,100,100);
+  text("Meditation", width - 240, height/2+45);
      if (mouseX > width - 400 && mouseX < width - 400 + 100 && mouseY > height/2 && mouseY < height/2 +100) {
      if (mousePressed) {
         i5Clicked = true;  // Set the imageClicked variable to true

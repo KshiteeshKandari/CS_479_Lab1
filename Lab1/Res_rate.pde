@@ -16,6 +16,15 @@ float maxXValue = 20;
 float lastXValue = 0;
 
 
+////
+
+
+ArrayList<Integer> respiratoryRatesAvg = new ArrayList<Integer>(); // Stores respiratory rate values
+long startTimeRes = System.currentTimeMillis(); // Start time for the 30-second collection period
+boolean collecting = true; // Flag to indicate if we are still in the collection period
+float averageRate = 0 ;
+float restingRate = 0.0;
+
 
 void resp_graph_setup() {
   respChart = new XYChart(this);
@@ -27,7 +36,7 @@ void resp_graph_setup() {
   respChart.showYAxis(true);
   respChart.setMinY(0);
   
-  respChart.setYFormat("00");
+  respChart.setYFormat("0");
   respChart.setXFormat("0");
   
   //respChart.setPointColour(0);
@@ -87,7 +96,7 @@ void res_rate_draw(){
     respiratoryRates.add(respiratoryRate);
    
     stroke(0);
-  respChart.draw(15, 15, width - 30, height - 30);
+    respChart.draw(15, 15, width - 30, height - 30);
 
   fill(0);
   //rect(500, 200, 0, 0);
@@ -101,41 +110,48 @@ void res_rate_draw(){
   //  stroke(0);
   //  strokeWeight(2);
   //}
-  
    displayRespiratoryRate();
 
 }
 
 
 
-void res_rate_serialEvent(float val) {
-  valList.add(val);
-  currentReading = val;
+void res_rate_serialEvent(float oxy) {
+  valList.add(oxy);
+  currentReading = oxy;
+  //print(val);
+  //print(" ");
+  //println(oxy);
   
    cc++;
   
   respChartX.append(cc);
-  respChartY.append(currentReading);
+  respChartY.append(oxy);
   
-  if (respChartX.size() > 7 && respChartY.size() > 7) {
+  if (respChartX.size() > 60 && respChartY.size() > 60) {
     respChartX.remove(0);
     respChartY.remove(0);
   }
   
+  //print(respChartY);
   //lineChart.setData(lineChartX.array(), lineChartY.array());
   //lineChart.setLineColor(pointColor);
 
-  respChart.setData(lineChartX.array(), lineChartY.array());
+  respChart.setData(respChartX.array(), respChartY.array());
 }
 
 void displayRespiratoryRate() {
   textSize(24);
   fill(0);
-  text("Respiratory Rate: " + respiratoryRate + " breaths per minute", 200, 50);
-  
+  text("Respiratory Rate: " + respiratoryRate + " breaths per minute", 40, height-200);
+  if (collecting) {
+    updateRespiratoryRate(respiratoryRate);
+  }
   textSize(16);
-  text("Inhalation Time: " + nf(inhalationTime / 1000, 1, 2) + " seconds", 200, 80);
-  text("Exhalation Time: " + nf(exhalationTime / 1000, 1, 2) + " seconds", 200, 110);
+  text("Inhalation Time: " + nf(inhalationTime / 1000, 1, 2) + " seconds" , 40, height-160);
+  text("Exhalation Time: " + nf(exhalationTime / 1000, 1, 2) + " seconds", 40, height-140);
+  text("Avg resp rate: " + restingRate + " seconds", width-200, height-60);
+  println(collecting);
 }
 
 boolean isLocalMaxima(ArrayList<Float> values) {
@@ -150,4 +166,24 @@ boolean isLocalMaxima(ArrayList<Float> values) {
 
   // Check if the last value is greater than both the second last and third last values
   return lastValue > secondLastValue && lastValue > thirdLastValue;
+}
+
+///
+
+void updateRespiratoryRate(int currentRate) {
+  // Check if we are still in the 30-second window
+  if (collecting && System.currentTimeMillis() - startTimeRes < 30000) {
+    respiratoryRatesAvg.add(currentRate);
+  } else {
+    // If 30 seconds have passed and we are still collecting, calculate the average
+    if (collecting && respiratoryRatesAvg.size() > 0) { // Check that we have collected data
+      int sum = 0;
+      for (int rate : respiratoryRatesAvg) {
+        sum += rate;
+      }
+      restingRate = sum / (float)respiratoryRatesAvg.size(); // Calculate average
+      println("Resting Respiratory Rate: " + restingRate);
+      collecting = false; // Stop collecting after calculating the average
+    }
+  }
 }
